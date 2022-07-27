@@ -10,7 +10,7 @@
             placeholder="Ingrese la tarea"
             aria-label="Recipient's username"
             aria-describedby="button-addon2"
-            v-model="tarea"
+            v-model="tarea.text"
           />
           <button
             class="btn btn-outline-primary"
@@ -21,17 +21,36 @@
           >
             Enviar
           </button>
+          
         </div>
+{{tarea}}
+g
       </div>
       <hr class="border border-primary border-2 opacity-75" />
       <div class="col p-5">
         <h2 style="color: #0288d1">Tareas</h2>
         <hr />
-        
+        {{ tareas }}
         <p v-for="(t, i) in tareas" :key="i">
-         <input type="checkbox">
-           <span class="p-2">{{ t }}</span>
-          <button @click="eliminarTarea(i)" class="btn btn-sm btn-danger">X</button>
+          <input
+            v-model="t.check"
+            type="checkbox"
+            class="form-check-input m-2"
+            role="switch"
+            id="flexSwitchCheckDefault"
+          />
+
+          <!-- <button @click="eliminarTarea(i)" class="btn btn-sm btn-danger">X</button>  -->
+          <v-chip
+            v-if="chip3"
+            class="ma-2"
+            close
+            color="green"
+            outlined
+            @click:close="eliminarTarea(i)"
+            :disabled="t.check == false"
+            ><span class="p-2">{{ t.text }}</span></v-chip
+          >
         </p>
       </div>
     </span>
@@ -43,18 +62,26 @@ export default {
   name: "Barra",
 
   data: () => ({
-    tarea: "",
+    tarea: {
+      check: true,
+      text: "",
+    },
     tareas: [],
+    chip3: true,
+    check: false,
   }),
 
   methods: {
     ponerTarea() {
       this.tareas.push(this.tarea);
-      this.tarea = "";
+      this.tarea = {
+        check: true,
+        text: "",
+      };
     },
 
     eliminarTarea(x) {
-      this.tareas.splice(x, x + 1);
+      this.tareas.splice(x, 1);
     },
   },
 };

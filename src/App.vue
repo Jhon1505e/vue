@@ -3,17 +3,22 @@
     <div class="container">
       <Barra />
     </div>
+    <div class="container">
+      <Imagenes/>
+    </div>
   </div>
 </template>
 
 <script>
 import Barra from "./components/Barra.vue";
+import Imagenes from "./components/Imagenes.vue";
 
 export default {
   name: "App",
   components: {
     Barra,
-  },
+    Imagenes
+},
 };
 </script>
 
